@@ -1,0 +1,93 @@
+using System;
+
+public class Point
+{
+    private double x;
+    private double y;
+
+    // getter setter
+    public double X
+    {
+        get => x;
+        set => x = value;
+    }
+
+    public double Y
+    {
+        get => y;
+        set => y = value;
+    }
+
+    // конструткор по умолчанию
+    public Point()
+    {
+        x = 0;
+        y = 0;
+    }
+
+    //  конструктор с параметрами
+    public Point(double x, double y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+    
+    // расстояние между 2 точками
+    public double DistanceTo(Point other)
+    {
+        double dx = other.x - this.x;
+        double dy = other.y - this.y;
+
+        return Math.Sqrt(dx * dx + dy * dy);
+    }
+
+    // перегрузка вывода
+    public override string ToString()
+    {
+        return $"Point({x}, {y})";
+    }
+
+    // ++ увеличивает x на 1
+    public static Point operator ++(Point p)
+    {
+        p.x += 1;
+        return p;
+    }
+
+    // -- уменьшает x на 1
+    public static Point operator --(Point p)
+    {
+        p.x -= 1;
+        return p;
+    }
+
+    // Явное приведение к int — целая часть X
+    public static explicit operator int(Point p)
+    {
+        return (int)p.x;
+    }
+
+    // Неявное приведение к double — возвращает Y
+    public static implicit operator double(Point p)
+    {
+        return p.y;
+    }
+
+    // Point + Point - расстояние между точками
+    public static double operator +(Point a, Point b)
+    {
+        return a.DistanceTo(b);
+    }
+
+    // Point + int - увеличиваем x
+    public static Point operator +(Point p, int value)
+    {
+        return new Point(p.x + value, p.y);
+    }
+
+    // int + Point - тоже увеличиваем x только с другой стороны
+    public static Point operator +(int value, Point p)
+    {
+        return new Point(p.x + value, p.y);
+    }
+}
