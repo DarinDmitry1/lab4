@@ -1,0 +1,66 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Тестирование класса Point");
+
+        Point p0 = new Point();
+        Console.WriteLine("Конструктор по умолчанию: " + p0);
+
+        Console.WriteLine("\nВведите координаты первой точки:");
+        double x1 = ReadDouble("  X1: ");
+        double y1 = ReadDouble("  Y1: ");
+        Point p1 = new Point(x1, y1);
+
+        Console.WriteLine("\nВведите координаты второй точки:");
+        double x2 = ReadDouble("  X2: ");
+        double y2 = ReadDouble("  Y2: ");
+        Point p2 = new Point(x2, y2);
+
+        Console.WriteLine("\nВведённые точки:");
+        Console.WriteLine("  p1 = " + p1);
+        Console.WriteLine("  p2 = " + p2);
+
+        double distance = p1.DistanceTo(p2);
+        Console.WriteLine($"\nРасстояние между p1 и p2 = {distance:F4}");
+
+        Point a = new Point(3.5, 4.2);
+        Point b = new Point(10, 8);
+
+        Console.WriteLine(a);
+
+        Console.WriteLine("Расстояние: " + (a + b));
+
+        a++;
+        Console.WriteLine("После a++: " + a);
+
+        a--;
+        Console.WriteLine("После a--: " + a);
+
+        Console.WriteLine("Явное (int)a: " + (int)a); // целая часть X
+        double yValue = a; // неявное double
+        Console.WriteLine("Неявное (double)a: " + yValue);
+
+        Point c = a + 5;
+        Console.WriteLine("a + 5 = " + c);
+
+        Point d = 7 + a;
+        Console.WriteLine("7 + a = " + d);
+    }
+
+    static double ReadDouble(string message)
+    {
+        double value;
+        Console.Write(message);
+
+        while (!double.TryParse(Console.ReadLine(), out value))
+        {
+            Console.Write("Ошибка! Введите корректное число: ");
+        }
+
+        return value;
+    }
+}
+
